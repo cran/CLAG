@@ -16,25 +16,23 @@ if (!$verbose) {
 	$verbose = 0;
 }
 
-my $res = 1;
-
 if($program eq 1){
 	if ($verbose) {
 		print "GENERAL matrix\n";
 	}
-	$res = system($^X, "./AnyMatrix/exe-RCommand.pl", "-f=$path", "-k=$parameter", "-d=$delta", "-verbose=$verbose");
+	system($^X, "-s", "./AnyMatrix/exe-RCommand.pl", "-f=$path", "-k=$parameter", "-d=$delta", "-verbose=$verbose") == 0 || die "failure";
 }else{
 	if($program eq 2){
 		if ($verbose) {
 			print "BINARY matrix\n";	
 		}
-		$res = system($^X, "./Binary/exe-RCommand.pl", "-f=$path", "-k=$parameter", "-verbose=$verbose");
+		system($^X, "-s", "./Binary/exe-RCommand.pl", "-f=$path", "-k=$parameter", "-verbose=$verbose") == 0 || die "failure";
 	}else{
 		if($program eq 3){
 			if ($verbose) {
 				print "SPECIFIC matrix where N=M\n";
 			}
-			$res = system($^X, "./SPECIFIC/exe-RCommand.pl" ,"-f=$path", "-k=$parameter", "-d=$delta", "-verbose=$verbose");
+			system($^X, "-s", "./SPECIFIC/exe-RCommand.pl" ,"-f=$path", "-k=$parameter", "-d=$delta", "-verbose=$verbose") == 0 || die "failure";
 			
 		}else{
 			print "ERROR: Please specify -p=1, 2 or 3";
@@ -42,6 +40,6 @@ if($program eq 1){
 		}
 	}
 }
-exit $res;
+exit 0;
 	
 

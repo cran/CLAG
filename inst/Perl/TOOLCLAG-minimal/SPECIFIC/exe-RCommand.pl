@@ -1,48 +1,28 @@
 #!/usr/bin/perl -s
-use File::Find;
 
-$path= $f;
+$SUBpath= $f;
 $parameter= $k;
 $delta= $d;
 
+if ($verbose) {
+	print "\n\nJOB SUMMARY\n";
+	print "Folder: $SUBpath\n";
+	print "-----------------------------------\n\n";
 
+	print "DEBUG: STEP1: Cluster";	
+}
+system($^X, "./SPECIFIC/1-CoEvScoring.pl", $SUBpath, $delta) == 0 || die "1-CoEvScoring.pl failed";
 
-$exp="input.txt";
-$SUBpath="";
-sub recherche {
-  if (-f){
-    push(@acronyme,"$File::Find::dir/$_")
-    if $_=~/$exp$/;
-  }
+if ($verbose) {
+	print "OK\n";
+
+	print "DEBUG: STEP2: Cluster aggregate...";	
+}
+system($^X, "./SPECIFIC/Aggregation.pl", $SUBpath, "aggregation", $parameter, $delta) == 0 || die "Aggregation.pl failed";
+if ($verbose) {
+	print "OK\n";
 }
 
-@acronyme=();
-$SUBpath="";
-find(\&recherche,"$path");
-foreach $acro (@acronyme)
-{
-	
-	
-	$SUBpath=substr($acro, 0,((length $acro)-10));
-	if ($verbose) {
-		print "\n\nJOB SUMMARY\n";
-		print "Folder: $SUBpath\n";
-		print "-----------------------------------\n\n";
-	
-		print "DEBUG: STEP1: Cluster";	
-	}
-	system($^X, "./SPECIFIC/1-CoEvScoring.pl", $SUBpath, $delta) == 0 || die "1-CoEvScoring.pl failed";
-	
-	if ($verbose) {
-		print "OK\n";
-
-		print "DEBUG: STEP2: Cluster aggregate...";	
-	}
-	system($^X, "./SPECIFIC/Aggregation.pl", $SUBpath, "aggregation", $parameter, $delta) == 0 || die "Aggregation.pl failed";
-	if ($verbose) {
-		print "OK\n";
-	}
-	
 #	print "DEBUG: STEP3: CLAG displays matrix...";		
 #	system "./SPECIFIC/2-MatrixNONClusterized.pl $SUBpath ";
 #	$RCommandFile=$SUBpath."/"."R_COMMAND-Matrix.txt";
@@ -72,10 +52,6 @@ foreach $acro (@acronyme)
 #	$RCommandFile=$SUBpath."/"."R_COMMAND-Matrix-Aggregated.txt";
 #	system "R --no-save < $RCommandFile > $SUBpath/DEBUG4.txt";
 #	print "OK\n";
-	
-} 
 
 exit 0;
 	
-	
-		

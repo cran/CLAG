@@ -1,7 +1,7 @@
-a9b0f575773a9f6d3896f4826d3075ee *DESCRIPTION
+e6fd67449a991a0a9c9c45bf8a0b1b71 *DESCRIPTION
 a19f9ec5eb39528d110adcc273b3b3a4 *NAMESPACE
-265df10d517c21a801198dc2be8855f6 *NEWS
-9447c89e7ccd2b0d291753ea507e342d *R/CLAG.R
+fd57d83af620a04f8aef7d6c1a158af5 *NEWS
+24d28d007a8e1e3d00d87865bc542ee6 *R/CLAG.R
 851e51f3618a12d6fc25805f5e429501 *inst/Perl/TOOLCLAG-minimal/AnyMatrix/1-CoEvScoring.pl
 add414983bf9e981bc44251551eab16d *inst/Perl/TOOLCLAG-minimal/AnyMatrix/2-MatrixNONClusterized.pl
 f6e51f9964fd69919cb7d9808a43fd66 *inst/Perl/TOOLCLAG-minimal/AnyMatrix/3-MatrixClusterized.pl
@@ -9,7 +9,7 @@ c39a37ea40afd5dd6aa3335f2a01a3de *inst/Perl/TOOLCLAG-minimal/AnyMatrix/3-MatrixC
 b476fabe4230c9759eac6f66e5561e3b *inst/Perl/TOOLCLAG-minimal/AnyMatrix/4-MatrixClusterizedParam.pl
 5da828feef8fd6813de69c45bb3d5938 *inst/Perl/TOOLCLAG-minimal/AnyMatrix/5-CallNeato.pl
 044606df6fb242a9470580aeab0a2c10 *inst/Perl/TOOLCLAG-minimal/AnyMatrix/Aggregation.pl
-ebd23a3c69e48d24c2749de1b1ba5ee5 *inst/Perl/TOOLCLAG-minimal/AnyMatrix/exe-RCommand.pl
+d82364c820312b0a750913a0c6934129 *inst/Perl/TOOLCLAG-minimal/AnyMatrix/exe-RCommand.pl
 17cd381d41edcd33aa2d321e00dbee60 *inst/Perl/TOOLCLAG-minimal/Binary/1-CoEvScoring.pl
 00a583fae7f68e98548b29e821fc7b5d *inst/Perl/TOOLCLAG-minimal/Binary/2-MatrixNONClusterized.pl
 fe5bab56d52247120e58be1758200730 *inst/Perl/TOOLCLAG-minimal/Binary/3-MatrixClusterized.pl
@@ -17,7 +17,7 @@ fe5bab56d52247120e58be1758200730 *inst/Perl/TOOLCLAG-minimal/Binary/3-MatrixClus
 fdb9fe97ff0dc420e23692d202203389 *inst/Perl/TOOLCLAG-minimal/Binary/4-MatrixClusterizedParam.pl
 f01e6f1be4cb4162b1175435ee610c8c *inst/Perl/TOOLCLAG-minimal/Binary/5-CallNeato.pl
 7794e52c6c6717b72a62d58a3eef3205 *inst/Perl/TOOLCLAG-minimal/Binary/Aggregation.pl
-9a0053511fc97ea239531d82eb064821 *inst/Perl/TOOLCLAG-minimal/Binary/exe-RCommand.pl
+68e94034b4620cc8cb2a3ad959bc7cec *inst/Perl/TOOLCLAG-minimal/Binary/exe-RCommand.pl
 0284c2027bd8a49edab2da2c086bd124 *inst/Perl/TOOLCLAG-minimal/LICENSE.txt
 a3ac7fad83edf8605fc53a21b5363a88 *inst/Perl/TOOLCLAG-minimal/README.txt
 ddcc7255c8b7ab96e02a3b3c0e551b0c *inst/Perl/TOOLCLAG-minimal/SPECIFIC/1-CoEvScoring.pl
@@ -27,10 +27,10 @@ b209b111da0eb07b5ede4eb6efaab35e *inst/Perl/TOOLCLAG-minimal/SPECIFIC/3-MatrixCl
 a6ee15a3da960e7e0aadc5c0001bdae2 *inst/Perl/TOOLCLAG-minimal/SPECIFIC/4-MatrixClusterizedParam.pl
 6b7d4c80ac27f07e44de6f6a5c959fcb *inst/Perl/TOOLCLAG-minimal/SPECIFIC/5-CallNeato.pl
 89f26b797be565e8317a363e8d04f0ce *inst/Perl/TOOLCLAG-minimal/SPECIFIC/Aggregation.pl
-482ad64cc6b5e3af2c680d9c3fa2241c *inst/Perl/TOOLCLAG-minimal/SPECIFIC/exe-RCommand.pl
-2dba632a1fa0b6a2b247f7cb7bace7e3 *inst/Perl/TOOLCLAG-minimal/exe-RCommand.pl
+8e53948c65920456fbc8f8eff723fa04 *inst/Perl/TOOLCLAG-minimal/SPECIFIC/exe-RCommand.pl
+572fd5b86926ef5a1ec5980d3e3ce1bc *inst/Perl/TOOLCLAG-minimal/exe-RCommand.pl
 406781e0392854724f8d1d06a6e7157c *inst/doc/CLAG-tutorial.Rnw
-fd64806a120681b5d1ca899cbf5603eb *inst/doc/CLAG-tutorial.pdf
+a9f061691853465b3c1dc85bc9c26988 *inst/doc/CLAG-tutorial.pdf
 346a153401b6e4b5a2132e9095958c9d *inst/doc/CLAG.bib
 a3fa774f4c29471b1403f625ab67b579 *inst/extdata/dataCLAG/BREAST.txt
 eea378bce3ca70fe6eb764c9f7af6bc4 *inst/extdata/dataCLAG/DIM128-subset.txt

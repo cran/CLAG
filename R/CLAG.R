@@ -96,7 +96,7 @@ CLAG.exec <- function(f, p=1, k=0, d=NULL, verbose=TRUE) {
   if (verbose) {
     cargs <- c(cargs, "-verbose")
   }
-  cargs <- c(shQuote(exefile), cargs)
+  cargs <- c("-s", shQuote(exefile), cargs)
   if (verbose) cat("perl", paste(cargs, collapse=" "), "\n")
   oldwd <- getwd()
   setwd(CLAG.path)
