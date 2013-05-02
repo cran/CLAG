@@ -40,18 +40,18 @@ CLAG: an unsupervised non hierarchical clustering algorithm handling biological 
 }
 \examples{
 # First example with real variables
-DATA <- CLAG.loadExampleData("DIM128-subset")
-RES <- CLAG.clust(DATA)
+data(DIM128_subset, package="CLAG")
+RES <- CLAG.clust(DIM128_subset)
 # Display points in 2D using a PCA and color them by cluster
 # except unclunsted points which are left black.
-PCA <- prcomp(DATA)
+PCA <- prcomp(DIM128_subset)
 clusterColors <- c("black", rainbow(RES$ncluster))
 plot(PCA$x[,1], PCA$x[,2], col=clusterColors[RES$cluster+1], main=paste(RES$nclusters, "clusters"))
 
 # Second example with boolean variables
 # (we replace each variable with TRUE or FALSE
 # depending on whether the value is below or above 128)
-DATA2 <- DATA > 128
+DATA2 <- DIM128_subset > 128
 RES <- CLAG.clust(DATA2, analysisType=2)
 PCA <- prcomp(DATA2)
 clusterColors <- c("black", rainbow(RES$ncluster))

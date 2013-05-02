@@ -42,8 +42,6 @@
 	}
 }
 
-CLAG.path <- system.file("Perl/TOOLCLAG-minimal", package="CLAG")
-CLAG.data.path <- system.file("extdata/dataCLAG", package="CLAG")
 
 CLAG.writeInput <- function(A, outfile, rowIds=NULL, colIds=NULL) {
   f <- file(outfile, "w")
@@ -81,6 +79,7 @@ CLAG.readInput <- function(infile, p=1) {
 
 
 CLAG.exec <- function(f, p=1, k=0, d=NULL, verbose=TRUE) {
+  CLAG.path <- system.file("Perl/TOOLCLAG-minimal", package="CLAG")
   exefile <- paste(CLAG.path, "/exe-RCommand.pl", sep="")
   if (!file.exists(exefile)) {
     stop(paste(exefile, "does not exist"))
@@ -278,12 +277,19 @@ CLAG.loadExampleData <- function(set=NULL) {
     cat("Available data sets: BREAST, GLOBINE, DIM128, DIM128-subset\n")
     return(NULL)
   }
-  if (set %in% c("BREAST","GLOBINE")) {
-    return(CLAG.readInput(paste(CLAG.data.path, "/", set, ".txt", sep="")))
+  env <- new.env()
+  if (set == "BREAST") {
+    data(BREAST, package="CLAG", envir=env)
+    return(list(M=env$BREAST, colIds=1:ncol(env$BREAST), rowIds=1:nrow(env$BREAST)))
+  } else if (set == "GLOBINE") {
+    data(GLOBINE, package="CLAG", envir=env)
+    return(env$GLOBINE)
   } else if (set == "DIM128") {
-    return(read.table(paste(CLAG.data.path, "/DIM128.txt", sep="")))
+    data(DIM128, package="CLAG", envir=env)
+    return(env$DIM128)
   } else if (set == "DIM128-subset") {
-    return(read.table(paste(CLAG.data.path, "/DIM128-subset.txt", sep="")))
+    data(DIM128_subset, package="CLAG", envir=env)
+    return(env$DIM128_subset)
   } else {
     stop(paste("unknown CLAG example data set:", set))
   }

@@ -1,3 +1,10 @@
+CLAG 2.9
+===============
+
+ * Make data available using the data() function
+ * Fix bug caused by hardcoded path at compile-time
+   (affected binary releases only)
+
 CLAG 2.6
 ===============
 

@@ -51,14 +51,14 @@ library(CLAG)
 Now, we load an example data set (provided with this package), then we run the CLAG algorithm on it.
 
 <<keep.source=TRUE>>=
-DATA <- CLAG.loadExampleData("DIM128-subset")
-RES <- CLAG.clust(DATA)
+data(DIM128_subset, package="CLAG")
+RES <- CLAG.clust(DIM128_subset)
 @
 
 Now, we do a Principal Component Analysis to better visualize the data, and color the points according to the clusters found by CLAG (or leave black unclustered points).
 
 <<keep.source=TRUE,fig=TRUE>>=
-PCA <- prcomp(DATA)
+PCA <- prcomp(DIM128_subset)
 clusterColors <- c("black", rainbow(RES$ncluster))
 plot(PCA$x[,1], PCA$x[,2], col=clusterColors[RES$cluster+1],
      main=paste(RES$nclusters, "clusters"))
@@ -77,8 +77,8 @@ The symmetric score measure the position in the distribution of the original val
 
 We load the data and run the cluster analysis, with the parameters proposed in \cite{CLAG}.
 <<keep.source=TRUE>>=
-DATA <- CLAG.loadExampleData("GLOBINE")
-M <- DATA$M
+data(GLOBINE, package="CLAG")
+M <- GLOBINE$M
 RES <- CLAG.clust(M, delta=0.2, threshold=0.5, analysisType=3)
 @
 

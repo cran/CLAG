@@ -1,3 +1,2 @@
 export("CLAG.clust")
-export("CLAG.loadExampleData")
 
