@@ -1,6 +1,6 @@
 \name{DIM128}
 \alias{DIM128}
-\title{Example data set provided with CLAG}
+\title{Example data set provided with CLAG (DIM128)}
 \description{
   Example data set provided with CLAG.
   This is an artificial data set with 1024

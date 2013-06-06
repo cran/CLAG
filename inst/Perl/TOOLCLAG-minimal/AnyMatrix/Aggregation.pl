@@ -1,5 +1,5 @@
 #!/usr/bin/perl -w
-use Time::HiRes qw/gettimeofday/;
+#use Time::HiRes qw/gettimeofday/;
 
 $folder=shift;
 $filoutput=shift;

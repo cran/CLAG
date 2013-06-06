@@ -1,5 +1,5 @@
 #!/usr/bin/perl -s
-use Time::HiRes qw/gettimeofday/;
+#use Time::HiRes qw/gettimeofday/;
 
 $SUBpath=$f;
 $parameter= $k;

@@ -159,8 +159,8 @@ CLAG.clust <- function(M,
   }
   
   if (analysisType == 3) {
-    if (is.null(colIds) && nrow(M) != ncol(M)) {
-      stop("No column ids provided although analysisType=3 and matrix is non-square")
+    if (is.null(rowIds) && nrow(M) != ncol(M)) {
+      stop("No row ids provided although analysisType=3 and matrix is non-square")
     }
   }
   
@@ -187,9 +187,13 @@ CLAG.clust <- function(M,
   }
   
   if (analysisType == 3) {
-    if (!all(colIds %in% rowIds)) {
+    if (!all(rowIds %in% colIds)) {
       stop("column ids need to be a subset of row ids when analysisType=3")
     }
+  }
+  
+  if (analysisType == 3 && normalization != "affine-global") {
+    warning("Using character-based normalization while doing symmetry anaylsis is probably not what you want since it breaks symmetry")
   }
   
   if (analysisType != 2) {
@@ -248,13 +252,13 @@ CLAG.clust <- function(M,
       }
       RES$cluster[indices] <- i
       if (analysisType == 3) {
-        RES$firstSymScore <- c(RES$firstScores, as.numeric(rawClusters[i,3]))
-        RES$lastSymScore <- c(RES$lastScores, as.numeric(rawClusters[i,4]))
-        RES$firstEnvScore <- c(RES$firstScores, as.numeric(rawClusters[i,5]))
-        RES$lastEnvScore <- c(RES$lastScores, as.numeric(rawClusters[i,6]))
+        RES$firstSymScore <- c(RES$firstSymScore, as.numeric(rawClusters[i,3]))
+        RES$lastSymScore <- c(RES$lastSymScore, as.numeric(rawClusters[i,4]))
+        RES$firstEnvScore <- c(RES$firstEnvScore, as.numeric(rawClusters[i,5]))
+        RES$lastEnvScore <- c(RES$lastEnvScore, as.numeric(rawClusters[i,6]))
       } else {
-        RES$firstEnvScore <- c(RES$firstScores, as.numeric(rawClusters[i,3]))
-        RES$lastEnvScore <- c(RES$lastScores, as.numeric(rawClusters[i,4]))
+        RES$firstEnvScore <- c(RES$firstEnvScore, as.numeric(rawClusters[i,3]))
+        RES$lastEnvScore <- c(RES$lastEnvScore, as.numeric(rawClusters[i,4]))
       }
     }
     RES$nclusters <- nrow(rawClusters)
@@ -268,30 +272,5 @@ CLAG.clust <- function(M,
   RES$colIds <- colIds
   RES$rawClusters <- rawClusters
   return(RES)
-}
-
-
-
-CLAG.loadExampleData <- function(set=NULL) {
-  if (is.null(set)) {
-    cat("Available data sets: BREAST, GLOBINE, DIM128, DIM128-subset\n")
-    return(NULL)
-  }
-  env <- new.env()
-  if (set == "BREAST") {
-    data(BREAST, package="CLAG", envir=env)
-    return(list(M=env$BREAST, colIds=1:ncol(env$BREAST), rowIds=1:nrow(env$BREAST)))
-  } else if (set == "GLOBINE") {
-    data(GLOBINE, package="CLAG", envir=env)
-    return(env$GLOBINE)
-  } else if (set == "DIM128") {
-    data(DIM128, package="CLAG", envir=env)
-    return(env$DIM128)
-  } else if (set == "DIM128-subset") {
-    data(DIM128_subset, package="CLAG", envir=env)
-    return(env$DIM128_subset)
-  } else {
-    stop(paste("unknown CLAG example data set:", set))
-  }
 }
 

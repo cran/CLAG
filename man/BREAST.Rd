@@ -1,6 +1,6 @@
 \name{BREAST}
 \alias{BREAST}
-\title{Example data set provided with CLAG}
+\title{Example data set provided with CLAG (breast)}
 \description{
   Example data set provided with CLAG.
   This data set contains microarray data from breast tumor cells,

@@ -1,6 +1,6 @@
 \name{DIM128_subset}
 \alias{DIM128_subset}
-\title{Example data set provided with CLAG}
+\title{Example data set provided with CLAG (DIM128 subset)}
 \description{
   Example data set provided with CLAG.
   This rows of this matrix are a subset of the rows of DIM128.

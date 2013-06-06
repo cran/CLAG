@@ -1,6 +1,6 @@
 \name{GLOBINE}
 \alias{GLOBINE}
-\title{Example data set provided with CLAG}
+\title{Example data set provided with CLAG (globine)}
 \description{
   Example data set provided with CLAG.
   This is a square matrix with coevolution coefficients

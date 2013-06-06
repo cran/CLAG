@@ -1,9 +1,34 @@
+CLAG 2.16
+===============
+
+ * FIX: Make perl Time:HiRes non necessary
+
+
+CLAG 2.15
+===============
+
+ * FIX: Make titles unique in documentation
+
+
+CLAG 2.12
+===============
+
+ * Add new functions to compare clusterings
+
+
+CLAG 2.11
+===============
+
+ * Fix bug in analysis mode 3 when the rows are a strict subset
+
+
 CLAG 2.9
 ===============
 
  * Make data available using the data() function
  * Fix bug caused by hardcoded path at compile-time
    (affected binary releases only)
+
 
 CLAG 2.6
 ===============
