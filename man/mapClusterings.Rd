@@ -16,15 +16,27 @@ An element e is identically clustered if one of these conditions is true:
 Differently clustered is the opposite.
 }
 \usage{
-mapClusterings(cl1, cl2, verbose=FALSE)
+mapClusterings(cl1, cl2, verbose=FALSE, use.solve.LSAP=NULL)
 }
 \arguments{
   \item{cl1}{A vector of integers such that cl1[i] is the number (>= 1) of the cluster in which i is. 0 is a special value that means the element is not clustered. (This is the format of the cluster field returned by \code{\link{CLAG.clust}})}
   \item{cl2}{The same for the other clustering.}
   \item{verbose}{Display information about tested cases.}
+  \item{use.solve.LSAP}{Whether to use solve_LSAP function from package clue.
+  If NULL (the default), solve_LSAP will be used only if the package clue
+  is installed.}
 }
 \details{
-The algorithm is branch and bound like. For a cluster i in the first clustering, it tries to associate it with every cluster j not already associated (and also to leave it alone), and for each of this choices explores recursively the choice for cluster i+1.
+We propose two methods for computing the number of differently
+clustered elements: using the solve_LSAP function from package clue
+or using our branch and bound algorithm. You can choose which one to use
+by setting the use.solve.LSAP parameter.
+
+The solve_LSAP function is much faster both in practice and theory
+(it is polynomial) but requires the clue package to be installed.
+See its own help page for information about how it works.
+
+The branch and bound algorithm we provide works like this: For a cluster i in the first clustering, it tries to associate it with every cluster j not already associated (and also to leave it alone), and for each of this choices explores recursively the choice for cluster i+1. In the worst case it runs in exponential time.
 
 The exploration is optimized by:
 \itemize{

@@ -87,31 +87,71 @@ mapClusteringsAux <- function(cl1, cl2, verbose) {
 # Conventions:
 # 0 = unclustered
 # integer >= 1: number of the cluster to which the element belongs
-mapClusterings <- function(cl1, cl2, verbose=FALSE) {
+mapClusterings <- function(cl1, cl2, verbose=FALSE, use.solve.LSAP=NULL) {
+  if ((!is.null(use.solve.LSAP) && use.solve.LSAP)
+      || (is.null(use.solve.LSAP) && (exists("solve_LSAP") || ("clue" %in% installed.packages()[,1])))) {
+    # Use solve_LSAP instead of our branch and bound algorithm
+    # because solve_LSAP is much faster.
+    return(mapClusteringsLSAP(cl1, cl2))
+  } else {
+    cl1 <- as.integer(cl1)
+    cl2 <- as.integer(cl2)
+    stopifnot(all(cl1 >= 0))
+    stopifnot(all(cl2 >= 0))
+    stopifnot(length(cl1) == length(cl2))
+    # When an element is unclusted in one clustering only,
+    # it will count as "different" whatever the cluster mapping is
+    unavoidableCost <- sum(xor(cl1 == 0, cl2 == 0))
+    # It is useless to try to map unclunstered elements, se remove then
+    keep <- cl1 != 0 & cl2 != 0
+    res <- mapClusteringsAux(cl1[keep], cl2[keep], verbose=verbose)
+    ndiff <- res$bad + unavoidableCost
+    
+    # Check the score by an independant method
+    test <- mapClusteringsTest(cl1, cl2, res$assoc)
+    stopifnot(test$ndiff == ndiff)
+    
+    return(list(ndiff=ndiff, assoc=res$assoc, diffclust=test$diffclust))
+  }
+}
+
+
+# Does the same job as mapClusterings, except that it uses
+# solve_LSPA from clue package to solve the problem.
+mapClusteringsLSAP <- function(cl1, cl2) {
+  if (!exists("solve_LSAP")) {
+    library(clue)
+  }
+  
   cl1 <- as.integer(cl1)
   cl2 <- as.integer(cl2)
   stopifnot(all(cl1 >= 0))
   stopifnot(all(cl2 >= 0))
   stopifnot(length(cl1) == length(cl2))
-  # When an element is unclusted in one clustering only,
-  # it will count as "different" whatever the cluster mapping is
-  unavoidableCost <- sum(xor(cl1 == 0, cl2 == 0))
-  # It is useless to try to map unclunstered elements, se remove then
-  keep <- cl1 != 0 & cl2 != 0
-  res <- mapClusteringsAux(cl1[keep], cl2[keep], verbose=verbose)
-  ndiff <- res$bad + unavoidableCost
   
-  # Check the score by an independant method
-  test <- mapClusteringsTest(cl1, cl2, res$assoc)
-  stopifnot(test$ndiff == ndiff)
+  ncl1 <- max(cl1)
+  ncl2 <- max(cl2)
+  N <- max(ncl1, ncl2)
+  M <- matrix(0, nrow=N, ncol=N)
+  for (i in 1:ncl1) {
+    for (j in 1:ncl2) {
+      M[i,j] <- sum(cl1 == i & cl2 == j)
+    }
+  }
   
-  return(list(ndiff=ndiff, assoc=res$assoc, diffclust=test$diffclust))
+  solution <- solve_LSAP(M, maximum=TRUE)
+  solution <- solution[1:ncl1]
+  solution[solution > ncl2] <- 0
+  
+  # Count how many elements are differently clustered
+  testres <- mapClusteringsTest(cl1, cl2, solution)
+  
+  return(list(ndiff=testres$ndiff, assoc=solution, diffclust=testres$diffclust))
 }
 
 
-
-compareClusterings <- function(cl1, cl2, verbose=FALSE) {
-  res <- mapClusterings(cl1, cl2, verbose=verbose)
+compareClusterings <- function(cl1, cl2, verbose=FALSE, use.solve.LSAP=NULL) {
+  res <- mapClusterings(cl1, cl2, verbose=verbose, use.solve.LSAP=use.solve.LSAP)
   cat("Cluster mapping:", res$assoc, "\n")
   cl1a <- rep(NA, length(cl1))
   for (i in 1:length(cl1)) {
